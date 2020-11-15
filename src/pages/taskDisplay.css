@@ -1,0 +1,154 @@
+:root{
+    --red-color:#F39595;
+    --gray-color:#F5F2F2;
+    --blue-color:#2F2E41;
+}
+
+button{
+    font-family: 'Questrial', sans-serif;
+}
+
+.todo-container{
+    background-color: white;
+    font-family: 'Questrial', sans-serif;
+}
+
+.button-container{
+    color: var(--blue-color);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.enable-todo-button{
+    background-color: var(--red-color);
+    color: var(--blue-color);
+    border: none;
+    width: 120px;
+    height: 25px;
+    border-radius: 5px 0 0 5px;
+}
+.disable-todo-button{
+    background-color: #F3F3F3;
+    color: var(--blue-color);
+    border: none;
+    width: 120px;
+    height: 25px;
+    border-radius: 5px 0 0 5px;
+}
+
+.disable-done-button{
+    background-color: #F3F3F3;
+    color: var(--blue-color);
+    border:none;
+    width: 120px;
+    height:25px;
+    border-radius: 0 5px 5px 0;
+}
+
+.enable-done-button{
+    background-color: var(--red-color);
+    color: var(--blue-color);
+    border:none;
+    width: 120px;
+    height:25px;
+    border-radius: 0 5px 5px 0;
+}
+
+.add-button{
+    width: 35px;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+}
+
+.remove-add-button{
+    display: none;
+}
+
+.tasks-container{
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    display: grid;    
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+}
+
+
+.task{
+    display: flex;
+    height: 30px;
+    border-radius: 6px;
+    background-color: #F3F3F3;
+    padding-left:5px;
+    justify-content: space-between;
+}
+
+.task input{
+    background-color: #F3F3F3;
+    height: 90%;
+    flex: 3;
+    margin: auto;
+    border: none;
+    font-size: 0.8rem;
+}
+.task ::placeholder{
+    font-family: 'Questrial', sans-serif;
+}
+
+.img-container{
+    flex: 1;
+    display: flex;
+    width: 30%;
+}
+
+.img-container img{
+    margin: auto;
+    width:15px;
+    height: 15px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.img-container .up{
+    transition: 0.3s ease-in-out;
+    transform: rotate(180deg);    
+}
+
+.tasks-container .expand-desc{
+    font-family: 'Questrial', sans-serif;
+    resize: none;
+    width: 90%;
+    height: 80px;
+    background-color: #FFDDDD;
+    display: block;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 0 0 5px 5px;
+    font-size: 0.6rem;
+    animation-name: dropDown;
+    animation-duration: 0.5s;
+}
+button:focus{
+    outline: none;
+}
+.task input:focus, .tasks-container textarea:focus{
+    outline: none;
+}
+.tasks-container .desc{
+    animation-name: dropUp;
+    animation-duration: 0.5s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+@keyframes dropDown{
+    from{resize: none;
+        height: 0;}
+    to{height:80px;}
+}
+
+.task .check-disable{
+    display: none;
+}

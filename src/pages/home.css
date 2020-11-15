@@ -1,0 +1,93 @@
+:root{
+    --red-color:#F39595;
+    --gray-color:#F5F2F2;
+    --blue-color:#2F2E41;
+}
+button{
+    font-family: 'Questrial', sans-serif;
+    cursor: pointer;
+}
+.home-section{
+    width: 90%;
+    min-height: 50vh;
+    margin: auto;
+    display: flex;
+    margin-top: 60px;
+    font-family: 'Questrial', sans-serif;
+    justify-content: space-between;
+}
+.home-section img{
+    flex: 1;
+    width: 400px;
+    margin: auto;
+    
+
+}
+.description{
+    flex: 1;
+    margin: auto;
+    width: 70%;
+}
+
+.description h1{
+    font-size: 3rem;
+}
+
+.description p{
+    font-size: 1.5rem;
+    color: gray;
+}
+
+.description .buttons{
+    display: flex;
+    margin: auto;
+}
+
+.buttons .signup-button{
+    width: 100px;
+    padding: 8px 12px 8px 12px;
+    border-style: solid;
+    border-color: var(--red-color);
+    border-radius: 5px;
+    background-color: var(--red-color);
+    color: white;
+    transition: all 0.4s ease-in-out;
+}
+
+.buttons .login-button{
+    width: 100px;
+    margin-left: 10px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: var(--red-color);
+    padding: 8px 12px 8px 12px;
+    background-color: white;
+    transition: all 0.4s ease-in-out;
+}
+.buttons .signup-button:hover{
+
+    background-color: var(--blue-color);
+}
+
+.buttons .login-button:hover{
+    border-color: var(--blue-color);
+}
+
+@media only screen and (max-width: 800px) {
+    .home-section{
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+    }
+    .buttons{
+        justify-content: center;
+    }
+
+    .home-section img{
+        margin-top: 20px;
+    }
+    .home-section{
+        text-align: center;
+    }
+
+}
