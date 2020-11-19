@@ -28,7 +28,7 @@
     font-weight: lighter;
     margin-bottom: 10px;
 }
-.signup-form input[type=text], input[type=password]{
+.signup-form input[type=text], input[type=password], input[type=email]{
     font-family: 'Questrial', sans-serif;
     color: var(--blue-color);
     margin: 9px;
@@ -38,7 +38,7 @@
     padding-left: 6px;
     font-size: 0.8rem;
 }
-.signup-form input[type=text]:focus, input[type=password]:focus{
+.signup-form input[type=text]:focus, input[type=password]:focus, input[type=email]:focus{
     outline: none;
     border-color: var(--red-color);
 }
@@ -59,6 +59,12 @@
     font-size: 12px;
     margin: 0;
     
+}
+
+.signup-form p{
+    color: var(--red-color);
+    font-size: 0.8rem;
+    text-align: center;
 }
 
 

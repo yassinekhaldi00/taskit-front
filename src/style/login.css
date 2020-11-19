@@ -46,7 +46,11 @@
     font-family: 'Questrial', sans-serif;
     color: #c4c3c3;
   }
-
+.login-form p{
+    color: var(--red-color);
+    font-size: 0.8rem;
+    text-align: center;
+}
 
 .login-form input[type=submit]{
     margin: auto;

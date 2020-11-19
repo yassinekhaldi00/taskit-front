@@ -55,16 +55,46 @@ button{
     border-radius: 0 5px 5px 0;
 }
 
+.add-task-field{
+    display: flex;
+    justify-content: center;
+}
+
+.input-task-field{
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.input-task-field input, textarea{
+    width: 300px;
+    margin: 3px;
+    font-family: 'Questrial', sans-serif;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    border: none;
+    background-color: #f3e3e3;
+    resize: none;
+}
+.input-task-field input::placeholder, textarea::placeholder{
+    font-size: 0.7rem;
+}
+
+.input-task-field input{
+    padding: 0 0 0 7px;
+    height: 25px;
+}
+.input-task-field textarea{
+    padding: 7px 0 0 7px;
+    height: 50px;
+}
 .add-button{
-    width: 35px;
-    display: block;
-    margin: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
 }
 
-.remove-add-button{
-    display: none;
-}
 
 .tasks-container{
     width: 90%;
@@ -72,7 +102,7 @@ button{
     margin-top: 20px;
     display: grid;    
     gap: 2rem;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(230px, 1fr));
 }
 
 

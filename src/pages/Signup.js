@@ -1,23 +1,66 @@
-import React from 'react';
-import './signup.css';
+import React, { useState } from 'react';
+import '../style/signup.css';
+import {useHistory, withRouter} from 'react-router-dom';
+import axios from 'axios';
 
-function Signup(){
+function Signup({addUserToLocalStorage, ...rest}){
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [checkbox, setCheckbox] = useState(false);
+    const [firstCheck, setFirstCheck] = useState(true);
+    const [accountExist, setAccountExist] = useState(false);
+
+
+    let history = useHistory();
+
+    async function handleSubmit(e){
+        e.preventDefault();
+        const data ={
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName
+        }
+        if(checkbox){
+            await axios.post('user/signup', data)
+            .then(res =>{
+                if(res.data.valid){
+                    localStorage.setItem('token',res.data.jwt);
+                    addUserToLocalStorage(res.data);
+                    history.push('/taskDisplay');
+                }
+                else{
+                    setAccountExist(true);
+                }
+            }).catch(erreur =>{
+                console.log(erreur);
+            })
+        }else{
+            setFirstCheck(false);
+        }
+        
+    }
+
     return(
         <div className='signup-container' >
-            <form className ='signup-form'>
+            <form className ='signup-form' onSubmit={handleSubmit}>
                 <h3>Create Your Account</h3>
-                <input type='text' name='firstName' placeholder='First Name'/>
-                <input type='text' name='lastName' placeholder='Last Name'/>
-                <input type='text' name='email' placeholder='Email'/>
-                <input type='password' name='password' placeholder='Password'/>
+                {accountExist && <p>An account already exists with this email address</p>}
+                <input type='text' name='firstName' placeholder='First Name' onChange={e=> setFirstName(e.target.value)}/>
+                <input type='text' name='lastName' placeholder='Last Name' onChange={e=> setLastName(e.target.value)}/>
+                <input type='email' name='email' placeholder='Email' onChange={e=> setEmail(e.target.value)}/>
+                <input type='password' name='password' placeholder='Password' onChange={e=> setPassword(e.target.value)}/>
                 <div className='agree'>
-                    <input type='checkbox' name='agree' />
+                    <input type='checkbox' name='agree' onChange={e=>setCheckbox(e.target.checked)}/>
                     <label>Agree to Terms & Conditions</label>
                 </div>
+                {checkbox || firstCheck ? null : <p>You must agree to Terms & Conditions</p> }
                 <input type='submit' value='Sign up'/>
             </form>
         </div>
     )
 }
 
-export default Signup;
+export default withRouter(Signup);

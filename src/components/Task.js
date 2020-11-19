@@ -10,14 +10,14 @@ export default function Task(props){
     return(
         <div className='task-container'>
             <div className='task' id = {props.task.id}>
-                <input type='text' placeholder='Enter your task' value={props.task.title} onChange={event=>props.task.title=event.target.value}/>
+                <input type='text' value={props.task.title} onChange={event=>props.task.title=event.target.value} disabled/>
                 <div className='img-container'>
                     <img className={expand ? 'up': 'down'} src={expandImage} alt='expand' onClick={()=>setExpand(!expand)}/>
                     <img className={props.checkButton} src={check} alt='check' onClick={()=>props.checkTask(props.task.id)}/>
                     <img className='delete-button' src={Delete} alt='delete' onClick={()=>props.deleteTask(props.task.id)}/>
                 </div>
             </div>
-            <textarea className={expand ? 'expand-desc' : 'desc'} placeholder="Enter your description" value={props.task.description} onChange={event=>props.task.description=event.target.value}></textarea>
+            <textarea className={expand ? 'expand-desc' : 'desc'}  value={props.task.description} onChange={event=>props.task.description=event.target.value} disabled></textarea>
         </div>
     )
 }
