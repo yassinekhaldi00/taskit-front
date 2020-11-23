@@ -76,10 +76,9 @@ button{
     margin: auto;
     margin-top: 20px;
     display: grid;    
-    gap: 2rem;
+    gap: 1.5rem;
     grid-template-columns: repeat(auto-fit,minmax(230px, 1fr));
 }
-
 
 .task{
     display: flex;

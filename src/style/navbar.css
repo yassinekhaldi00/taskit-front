@@ -27,15 +27,15 @@
     flex:1;
 }
 
-.navbar-container .logo img{
+ .logo img{
     width: 2rem;
     height: 2rem;
 }
-.nav-list{
+.nav-list, .nav-list-drop{
     flex :1;
 }
 
-.nav-list ul{
+.navbar-container ul{
     display: flex;
     list-style: none;
     justify-content: space-between;
@@ -44,12 +44,12 @@
 }
 
 
-.nav-list .link{
+.navbar-container .link{
     color: black;
     text-decoration: none;
 }
 
-.nav-list .signup{
+.navbar-container .signup{
     color: black;
     border: solid 2px;
     padding: 6px 12px 6px 12px;
@@ -57,3 +57,65 @@
     border-color: var(--red-color);
     transition: 0.3s ease-in-out;
 }
+.bar{
+    margin: 0px;
+    padding-top: 0px;
+  }
+.bar .material-icons{
+    display: none;
+}
+
+@media screen and (max-width: 600px){
+    .nav-list{
+        display: none;
+    }
+    .bar .material-icons{
+        display: block;
+        position: absolute;
+        top:0;
+        right: 0;
+        transform: translate(-75%, 50%);
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+
+    .nav-list-drop{
+        position: absolute;
+        right: 0;
+        top: 50px;
+        background-color: var(--red-color);
+        opacity: 0.9;
+        width: 100%;
+        transition: all 0.8s ease;
+    }
+    .nav-list-drop ul{
+        display: flex;
+        flex-direction: column;
+        margin:0;
+        padding: 0;
+        list-style: none;
+    }
+    .nav-list-drop li{
+        width:100%;
+        border-bottom: solid 1px;
+        border-color:white; 
+        margin: auto;
+    }
+
+    .nav-list-drop .link {
+        color: white;
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        display: table;
+        width:100%;
+        padding-top: 1.2rem;
+        padding-bottom: 1.2rem;
+        transition: all 0.8s ease;
+    }
+
+    .nav-list-drop .signup{
+        padding: 0;
+    }
+}  

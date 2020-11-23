@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../style/signup.css';
 import {useHistory, withRouter} from 'react-router-dom';
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
 
 function Signup(props){
     const [email, setEmail] = useState('');

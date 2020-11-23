@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import './App.css';
 import Navbar from './navbar/Navbar';
@@ -14,14 +14,7 @@ function App() {
 
   const [user, setUser] = useState(localStorage.getItem('user'));
 
-  useEffect(() => {
-    if(user){
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-    }
-  }, []);
-
   function addUserToLocalStorage(user){
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
     localStorage.setItem('user',JSON.stringify(user));
     setUser(localStorage.getItem('user'));
   }
@@ -30,7 +23,6 @@ function App() {
     localStorage.clear();
     delete axios.defaults.headers.common["Authorization"];
     setUser(localStorage.getItem('user'));
-    console.log(user);
   }
 
   return (

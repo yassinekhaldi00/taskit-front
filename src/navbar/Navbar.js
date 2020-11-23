@@ -6,6 +6,8 @@ import logo from '../images/logo.png';
 
 function Navbar(props){
 
+    const [dropMenu, setDropMenu] = useState(false);
+
     function MenuItems(){
 
         if(props.user){
@@ -33,7 +35,8 @@ function Navbar(props){
                     <img src= {logo} alt="logo"/>
                     <h4>TASKIT</h4>
                 </div>
-                <div className = 'nav-list'>
+                <div className ="bar"><i className="material-icons" onClick={()=> setDropMenu(!dropMenu)}>{dropMenu ? 'clear' : 'list' }</i></div>
+                <div className = {dropMenu ?'nav-list-drop': 'nav-list'}>
                     <MenuItems/>
                 </div>
             </nav>

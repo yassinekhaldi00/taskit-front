@@ -31,6 +31,7 @@ function TaskDisplay({user, ...rest}){
     }
 
     useEffect(() => {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
         loadTasks();
       }, []);
 
@@ -45,7 +46,6 @@ function TaskDisplay({user, ...rest}){
         }
         await axios.post('task', data)
             .then(res=>{
-                console.log(res.data);
                 tasks.push({
                     id: res.data.id,
                     title: res.data.title,
@@ -65,7 +65,6 @@ function TaskDisplay({user, ...rest}){
             .then(res=>{
                 for (let i=0;i<tasks.length;i++){
                     if(tasks[i].id===id){
-                        console.log(tasks[i]);
                         tasks.splice(i,1);
                     }
                 }

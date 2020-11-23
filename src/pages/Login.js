@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import '../style/login.css'
 import welcome from '../images/welcome.svg';
-import {useHistory, withRouter} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
 
 function Login(props){
     
@@ -21,7 +20,6 @@ function Login(props){
         }
         await axios.post('user/authenticate', data)
             .then(res =>{
-                console.log(res);
                 setValidUser(true);
                 localStorage.setItem('token',res.data.jwt);
                 props.addUserToLocalStorage(res.data);

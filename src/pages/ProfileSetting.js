@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import '../style/profileSetting.css';
 import Profile from "../components/Profile";
 import AccountSecurity from "../components/AccountSecurity";
 import Account from '../components/Account';
+import axios from 'axios';
 
 export default function ProfileSettings(props){
     const user = JSON.parse(props.user);
     const[liClicked, setLiClicked] = useState(0);
+    useEffect(() => {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+    }, []);
 
     return (
         <div className='setting-container'>
