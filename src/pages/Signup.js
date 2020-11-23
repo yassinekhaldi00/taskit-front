@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import '../style/signup.css';
 import {useHistory, withRouter} from 'react-router-dom';
 import axios from 'axios';
+import bcrypt from 'bcryptjs';
 
-function Signup({addUserToLocalStorage, ...rest}){
+function Signup(props){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -28,7 +29,7 @@ function Signup({addUserToLocalStorage, ...rest}){
             .then(res =>{
                 if(res.data.valid){
                     localStorage.setItem('token',res.data.jwt);
-                    addUserToLocalStorage(res.data);
+                    props.addUserToLocalStorage(res.data);
                     history.push('/taskDisplay');
                 }
                 else{

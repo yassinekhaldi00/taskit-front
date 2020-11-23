@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import './App.css';
 import Navbar from './navbar/Navbar';
 import Home from './pages/Home';
@@ -7,14 +7,21 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import TaskDisplay from './pages/TaskDisplay';
 import PrivateRoute from './components/PrivateRoute';
-import LoginRoute from './components/LoginRoute';
+import ProfileSetting from './pages/ProfileSetting';
 import axios from 'axios';
 
 function App() {
 
   const [user, setUser] = useState(localStorage.getItem('user'));
 
+  useEffect(() => {
+    if(user){
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+    }
+  }, []);
+
   function addUserToLocalStorage(user){
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
     localStorage.setItem('user',JSON.stringify(user));
     setUser(localStorage.getItem('user'));
   }
@@ -31,10 +38,13 @@ function App() {
       <Router>
       <Navbar user={user} DelUserFromLocalStorage={DelUserFromLocalStorage}/>
         <Switch>
-          <Route exact path="/"><Home/></Route>
-          <LoginRoute path="/signup" user={user} addUserToLocalStorage={addUserToLocalStorage} component={Signup}/>
-          <LoginRoute path="/login" user={user} addUserToLocalStorage={addUserToLocalStorage} component={Login}/>
+          <Route exact path="/">{user ?  <Redirect to="/taskDisplay"/> : <Home/>}</Route>
+          <Route path="/signup">{user ?  <Redirect to="/taskDisplay"/> : <Signup addUserToLocalStorage={addUserToLocalStorage}/>}</Route>
+          <Route path="/login">{user ?  <Redirect to="/taskDisplay"/> : <Login addUserToLocalStorage={addUserToLocalStorage}/>}</Route>
           <PrivateRoute path="/taskDisplay" user={user} component={TaskDisplay}/>
+          <Route  path="/setting">
+            {user ?  <ProfileSetting user={user} DelUserFromLocalStorage={DelUserFromLocalStorage} addUserToLocalStorage={addUserToLocalStorage}/>: <Redirect to="/login"/> }
+          </Route>
         </Switch>
       </Router>
     </div>

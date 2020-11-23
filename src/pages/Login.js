@@ -3,8 +3,9 @@ import '../style/login.css'
 import welcome from '../images/welcome.svg';
 import {useHistory, withRouter} from 'react-router-dom';
 import axios from 'axios';
+import bcrypt from 'bcryptjs';
 
-function Login({addUserToLocalStorage, ...rest}){
+function Login(props){
     
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -23,9 +24,9 @@ function Login({addUserToLocalStorage, ...rest}){
                 console.log(res);
                 setValidUser(true);
                 localStorage.setItem('token',res.data.jwt);
-                addUserToLocalStorage(res.data);
+                props.addUserToLocalStorage(res.data);
                 history.push('/taskDisplay');
-            }).catch(erreur =>{
+            }).catch(err =>{
                 setValidUser(false);
             })
     }
@@ -34,13 +35,13 @@ function Login({addUserToLocalStorage, ...rest}){
         <div className='login-container' >
         <form className ='login-form' onSubmit={handleSubmit}>
             <img src={welcome} alt='welcome'/>
-            <input type='text' name='email' placeholder='Email' onChange={e => setEmail(e.target.value)}/>
+            <input type='email' name='email' placeholder='Email' onChange={e => setEmail(e.target.value)}/>
             <input type='password' name='password' placeholder='Password' onChange={e => setPassword(e.target.value)}/>
-            {validUser ? null : <p>Incorrect username or password</p> }
+            {validUser ? null : <p>Incorrect email or password</p> }
             <input type='submit' value='Login'/>
         </form>
     </div>
     )
 }
 
-export default withRouter(Login);
+export default Login;

@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from 'react';
-import{NavLink} from 'react-router-dom'
+import{NavLink, Redirect} from 'react-router-dom'
 import '../style/navbar.css';
 import logo from '../images/logo.png';
 
@@ -11,7 +11,8 @@ function Navbar(props){
         if(props.user){
             return (
                 <ul>
-                    <li><NavLink className='link' to='/'> {JSON.parse(props.user).firstName} </NavLink></li>
+                    <li><NavLink className='link' to ='/taskdisplay'> Home </NavLink></li>
+                    <li><NavLink className='link' to ='/setting'> {JSON.parse(props.user).firstName} </NavLink></li>
                     <li className='signup'><NavLink className='link'to='/Login' onClick={props.DelUserFromLocalStorage}>Logout </NavLink></li>
                 </ul>
             )
@@ -28,7 +29,7 @@ function Navbar(props){
     return(
         <div className ='navbar-container' >
             <nav>
-                <div className = 'logo'>
+                <div className = 'logo' >
                     <img src= {logo} alt="logo"/>
                     <h4>TASKIT</h4>
                 </div>

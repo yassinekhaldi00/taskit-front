@@ -12,7 +12,9 @@ button{
     background-color: white;
     font-family: 'Questrial', sans-serif;
 }
-
+.todo-container .setting-links{
+    width: 10rem;
+}
 .button-container{
     color: var(--blue-color);
     padding: 15px;
@@ -28,32 +30,6 @@ button{
     height: 25px;
     border-radius: 5px 0 0 5px;
 }
-.disable-todo-button{
-    background-color: #F3F3F3;
-    color: var(--blue-color);
-    border: none;
-    width: 120px;
-    height: 25px;
-    border-radius: 5px 0 0 5px;
-}
-
-.disable-done-button{
-    background-color: #F3F3F3;
-    color: var(--blue-color);
-    border:none;
-    width: 120px;
-    height:25px;
-    border-radius: 0 5px 5px 0;
-}
-
-.enable-done-button{
-    background-color: var(--red-color);
-    color: var(--blue-color);
-    border:none;
-    width: 120px;
-    height:25px;
-    border-radius: 0 5px 5px 0;
-}
 
 .add-task-field{
     display: flex;
@@ -61,7 +37,6 @@ button{
 }
 
 .input-task-field{
-    margin: 15px;
     display: flex;
     flex-direction: column;
 }

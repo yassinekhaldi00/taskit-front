@@ -1,0 +1,169 @@
+:root{
+    --red-color:#F39595;
+    --gray-color:#F5F2F2;
+    --blue-color:#2F2E41;
+}
+
+button{
+    font-family: 'Questrial', sans-serif;
+}
+
+.setting-links{
+    padding-top: 15px;
+    display: flex;
+    width: 30rem;
+    margin: auto;
+    justify-content: space-between;
+    list-style: none;
+    font-family:'Quicksand', sans-serif; 
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.setting-links li{
+    padding: 5px;
+}
+
+.setting-links .clicked-link{
+    border-bottom: solid 2px;
+    border-color: var(--red-color);
+}
+
+.form-container{
+    font-size: 0.7rem;
+    padding: 30px 0 30px 0;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+}
+.form-container h1{
+    margin: 0;
+    font-family:'Quicksand', sans-serif; 
+}
+.form-container hr{
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+.profile-container{
+    width: 70%;
+    margin: auto;
+}
+
+.security-container{
+    width: 70%;
+    margin: auto;
+}
+
+.security-container p, .profile-container p{
+    border-radius: 5px;
+    padding: 7px;
+    margin: auto;
+    width:170px;
+    text-align: center;
+}
+
+.security-container .password-match, .wrong-password{
+    background-color: rgb(250, 172, 172);
+    color: red;
+}
+.security-container .right-password, .profile-container .setting-changed{
+    background-color: rgb(171, 211, 171);
+    color: green;
+}
+.account-container{
+    width: 70%;
+    margin: auto;
+}
+.account-container p{
+    margin: 20px 0 ;
+    font-family: 'Questrial', sans-serif;
+    font-size: 0.75rem;
+}
+
+.form-container .input-container{
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    margin: 20px;
+}
+.form-container label{
+    font-family: 'Questrial', sans-serif;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    flex:1;
+}
+.form-container input{
+    flex:2;
+    font-family: 'Questrial', sans-serif;
+    color: var(--blue-color);
+    border-radius: 5px ;
+    height: 22px;
+    width: 50%;
+    border: solid #e4e4e4 0.5px;
+    padding-left: 6px;
+    font-size: 0.8rem;
+}
+.form-container button{
+    font-size: 0.7rem;
+    display: block;
+    margin: 20px auto 20px auto;
+    width: 5rem;
+    border-radius: 8px;
+    border: none;
+    padding: 10px 0 10px 0;
+    background-color: var(--red-color);
+    color: white;
+    font-family: 'Questrial', sans-serif;
+    cursor: pointer;
+}
+.account-container button{
+    width:200px;
+}
+
+.popup p{
+    text-align: center;
+}
+.popup input{
+    display: block;
+    margin: auto;
+}
+
+.popup-button{
+    width: 80%;
+    margin: auto;
+    display: flex;
+}
+.popup-button button{
+    width: 100px;
+    background-color: rgb(252, 108, 108);
+}
+.popup-button .exit-button{
+    background-color: grey;
+}
+
+@media only screen and (max-width: 800px){
+    .setting-links{
+        width: 20rem;
+    }
+    .form-container{
+        width:85%;
+    }
+    .profile-container{
+        width: 90%;
+    }
+    
+    .security-container{
+        width: 90%;
+    }
+    .account-container{
+        width: 90%;
+    }
+    
+}
+

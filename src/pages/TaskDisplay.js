@@ -31,7 +31,6 @@ function TaskDisplay({user, ...rest}){
     }
 
     useEffect(() => {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
         loadTasks();
       }, []);
 
@@ -102,10 +101,10 @@ function TaskDisplay({user, ...rest}){
 
     return(
         <div className='todo-container'>
-            <div className ='button-container'>
-                <button className={todoPage ? "enable-todo-button" :'disable-todo-button'} onClick={()=>setTodoPage(true)}>To do</button>
-                <button className={todoPage ? 'disable-done-button' :"enable-done-button"} onClick={()=>setTodoPage(false)}>Done</button>
-            </div>
+            <ul className="setting-links">
+                <li className={todoPage ? "clicked-link" : null} onClick={()=>setTodoPage(true)}>To do</li>
+                <li className={todoPage ? null :"clicked-link"} onClick={()=>setTodoPage(false)}>Done</li>
+            </ul>
             {todoPage && 
             <div className='add-task-field'>
                 <div className='input-task-field' >
