@@ -5,7 +5,7 @@ import plus from '../images/plus.png';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
-function TaskDisplay({user, ...rest}){
+function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
     
     const [tasks, setTasks]=useState([]);
     const [todoPage, setTodoPage] = useState(true);
@@ -25,6 +25,7 @@ function TaskDisplay({user, ...rest}){
                 });
             })
         }).catch(erreur=>{
+            DelUserFromLocalStorage();
             console.log(erreur);
         })
         setTasks([...tasks]);
@@ -53,6 +54,7 @@ function TaskDisplay({user, ...rest}){
                     checked: res.data.done,
                 });
             }).catch(erreur=>{
+                DelUserFromLocalStorage();
                 console.log(erreur);
             })
         
@@ -69,6 +71,7 @@ function TaskDisplay({user, ...rest}){
                     }
                 }
             }).catch(erreur=>{
+                DelUserFromLocalStorage();
                 console.log(erreur);
             })
         setTasks([...tasks]);

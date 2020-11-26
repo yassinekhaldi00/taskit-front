@@ -20,6 +20,8 @@ export default function AccountSecurity(props){
                 .then(res=>{
                     setWrongPassword(!res.data);
                     setRightPassword(res.data);
+                }).catch(err=>{
+                    props.DelUserFromLocalStorage();
                 })
         }else{
             setPasswordMatch(false)

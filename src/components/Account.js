@@ -21,6 +21,8 @@ export default function Account(props){
                     props.DelUserFromLocalStorage();
                     history.push('/Login');
                 }
+            }).catch(err=>{
+                props.DelUserFromLocalStorage();
             })
     }
 

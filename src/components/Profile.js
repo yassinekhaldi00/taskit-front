@@ -19,6 +19,8 @@ export default function Profile(props){
             .then(res=>{
                 props.addUserToLocalStorage(res.data);
                 setSettingChanged(true);
+            }).catch(err=>{
+                props.DelUserFromLocalStorage();
             })
     }
 

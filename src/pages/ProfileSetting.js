@@ -20,8 +20,8 @@ export default function ProfileSettings(props){
                 <li className={liClicked===2? "clicked-link" :null} onClick={()=>setLiClicked(2)}>Account</li>
             </ul>
             <div className="form-container">
-                {liClicked === 0 && <Profile user={user} addUserToLocalStorage={props.addUserToLocalStorage}/>}
-                {liClicked === 1 && <AccountSecurity user={user}/>}
+                {liClicked === 0 && <Profile user={user} addUserToLocalStorage={props.addUserToLocalStorage} DelUserFromLocalStorage={props.DelUserFromLocalStorage}/>}
+                {liClicked === 1 && <AccountSecurity user={user} DelUserFromLocalStorage={props.DelUserFromLocalStorage}/>}
                 {liClicked === 2 && <Account user={user} DelUserFromLocalStorage={props.DelUserFromLocalStorage}/>}
             </div>
         </div>

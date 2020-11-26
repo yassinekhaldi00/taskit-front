@@ -33,7 +33,7 @@ function App() {
           <Route exact path="/">{user ?  <Redirect to="/taskDisplay"/> : <Home/>}</Route>
           <Route path="/signup">{user ?  <Redirect to="/taskDisplay"/> : <Signup addUserToLocalStorage={addUserToLocalStorage}/>}</Route>
           <Route path="/login">{user ?  <Redirect to="/taskDisplay"/> : <Login addUserToLocalStorage={addUserToLocalStorage}/>}</Route>
-          <PrivateRoute path="/taskDisplay" user={user} component={TaskDisplay}/>
+          <PrivateRoute path="/taskDisplay" user={user} DelUserFromLocalStorage={DelUserFromLocalStorage} component={TaskDisplay}/>
           <Route  path="/setting">
             {user ?  <ProfileSetting user={user} DelUserFromLocalStorage={DelUserFromLocalStorage} addUserToLocalStorage={addUserToLocalStorage}/>: <Redirect to="/login"/> }
           </Route>
