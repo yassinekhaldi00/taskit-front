@@ -11,6 +11,7 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
     const [todoPage, setTodoPage] = useState(true);
     const [newTaskTitle, setNewTaskTitle] = useState();
     const [newTaskDesc, setNewTaskDesc] = useState();
+    const [search, setSearch] = useState('');
     user = JSON.parse(user);
 
     async function loadTasks(){
@@ -101,12 +102,31 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
             })
     }
 
+    function filterTasks(task){
+        if (search !=='' && task.title !== null){
+            if (task.title.toLowerCase().indexOf(search.toLowerCase()) !==-1){
+                return task;
+            }else{
+                return null;
+            }
+        }else{
+            return task;
+        }
+    }
+
     return(
         <div className='todo-container'>
-            <ul className="setting-links">
-                <li className={todoPage ? "clicked-link" : null} onClick={()=>setTodoPage(true)}>To do</li>
-                <li className={todoPage ? null :"clicked-link"} onClick={()=>setTodoPage(false)}>Done</li>
-            </ul>
+            <header className="header-bar">
+                <ul className="setting-link">
+                    <li className={todoPage ? "clicked-link" : null} onClick={()=>setTodoPage(true)}>To do</li>
+                    <li className={todoPage ? null :"clicked-link"} onClick={()=>setTodoPage(false)}>Done</li>
+                </ul>
+                <div className="search">
+                    <input type='text' placeholder="Search" onChange={e=>setSearch(e.target.value)}/>
+                    <i className="fa fa-search"></i>
+                </div>
+            </header>
+            
             {todoPage && 
             <div className='add-task-field'>
                 <div className='input-task-field' >
@@ -120,10 +140,14 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
                 {
                      tasks.map(task=>{ 
                          if(!task.checked && todoPage){
-                            return <Task task={task} deleteTask={deleteTask} checkButton='check-enable' checkTask={checkTask}/>
+                             if (filterTasks(task)!==null){
+                                 return <Task task={task} deleteTask={deleteTask} checkButton='check-enable' checkTask={checkTask}/>
+                             }
                          }
                          if(task.checked && !todoPage){
-                            return <Task task={task} deleteTask={deleteTask} checkButton='check-disable' />
+                            if (filterTasks(task)!==null){
+                                return <Task task={task} deleteTask={deleteTask} checkButton='check-enable' checkTask={checkTask}/>
+                            }
                          }
                      })
                 }
