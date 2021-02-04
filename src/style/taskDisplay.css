@@ -9,6 +9,7 @@ button{
 }
 
 .todo-container{
+    z-index: 1;
     background-color: white;
     font-family: 'Questrial', sans-serif;
 }
@@ -21,7 +22,8 @@ button{
     width: 95%;
 }
 .header-bar .setting-link{
-    width: 20rem;
+    width: 40rem;
+    font-size: 1.4rem;
     display: flex;
     margin: auto;
     justify-content: space-evenly;
@@ -48,8 +50,9 @@ button{
     border-color: #e2d9d9;
 }
 .search input{
+    width: 140px;
     padding: 1px;
-    font-size: 10px;
+    font-size: 0.9rem;
     padding-left: 10px;
     border: none;
 }
@@ -66,7 +69,7 @@ button{
     color: rgb(213, 213, 213);
 }
 .search i{
-    font-size: 13px;
+    font-size: 0.9rem;
     margin-right: 8px;
     color: #bab2b2;
 }
@@ -95,23 +98,28 @@ button{
     display: flex;
     flex-direction: column;
 }
-.input-task-field input, textarea{
+.input-task-field input, .input-task-field textarea{
     width: 300px;
     margin: 3px;
     font-family: 'Questrial', sans-serif;
-    font-size: 0.8rem;
+    font-size: 1rem;
     border-radius: 3px;
     border: none;
-    background-color: #f3e3e3;
+    background-color: white;
+    border: 2.5px solid;
+    border-color: rgb(255, 214, 214);
     resize: none;
 }
-.input-task-field input::placeholder, textarea::placeholder{
-    font-size: 0.7rem;
+.input-task-field input::placeholder, .input-task-field textarea::placeholder{
+    color:rgb(189, 189, 189);
 }
-
+.input-task-field input:focus, .input-task-field textarea:focus{
+    outline: none;
+    border-color: var(--red-color);
+}
 .input-task-field input{
-    padding: 0 0 0 7px;
-    height: 25px;
+    padding-left: 7px;
+    height: 30px;
 }
 .input-task-field textarea{
     padding: 7px 0 0 7px;
@@ -129,15 +137,16 @@ button{
 .tasks-container{
     width: 90%;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 8px;
     display: grid;    
     gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit,minmax(250px, 0.4fr));
+    grid-template-columns: repeat(auto-fit,minmax(350px, 0.4fr));
 }
 
 .task{
+    margin-top: 20px;
     display: flex;
-    height: 30px;
+    height: 40px;
     border-radius: 6px;
     background-color: #F3F3F3;
     padding-left:5px;
@@ -150,7 +159,7 @@ button{
     flex: 3;
     margin: auto;
     border: none;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 .task ::placeholder{
     font-family: 'Questrial', sans-serif;
@@ -164,8 +173,8 @@ button{
 
 .img-container img{
     margin: auto;
-    width:15px;
-    height: 15px;
+    width:20px;
+    height: 20x;
     cursor: pointer;
     transition: 0.3s ease-in-out;
 }
@@ -174,6 +183,68 @@ button{
     transform: rotate(180deg);    
 }
 
+.task-container{
+    position: relative;
+
+}
+.menu-container {
+    z-index: 2;
+    position: absolute;
+    top: 45px;
+    right: 0;
+}
+.menu-container .menu-ul{
+    width: 220px;
+    border-radius: 6px;
+    padding: 0;
+    background-color: rgb(255, 255, 255);
+    border: 3px solid;
+    border-color: var(--gray-color);
+    background-color: var(--gray-color);
+    list-style: none;
+}
+
+.menu-ul li{
+    padding: 7px;
+    border: 2px solid;
+    border-color: var(--gray-color);
+    background-color: white;
+    cursor: pointer;
+}
+.menu-ul li:hover{
+    background-color: rgb(255, 214, 214);
+}
+
+.menu-ul img{
+    margin-right: 20px;
+    width: 17px;
+    vertical-align: middle;
+}
+.menu-ul span{
+    font-size: 0.9rem;
+    min-height: 20px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.move{
+    position: relative;
+}
+
+.move-li{
+    width: 150px;
+    border-radius: 6px;
+    padding: 0;
+    background-color: rgb(255, 255, 255);
+    border: 3px solid;
+    border-color: var(--gray-color);
+    background-color: var(--gray-color);
+    list-style: none;
+    z-index: 2;
+    position: absolute;
+    top: 0px;
+    right: -160px;
+}
 .tasks-container .expand-desc{
     font-family: 'Questrial', sans-serif;
     resize: none;
@@ -185,7 +256,7 @@ button{
     padding: 10px;
     border: none;
     border-radius: 0 0 5px 5px;
-    font-size: 0.6rem;
+    font-size: 0.9rem;
     animation-name: dropDown;
     animation-duration: 0.5s;
 }

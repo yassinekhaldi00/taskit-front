@@ -1,20 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import '../style/taskDisplay.css';
-import Task from '../components/Task';
-import plus from '../images/plus.png';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import Todo from '../subPages/Todo'
+import Doing from '../subPages/Doing'
+import Done from '../subPages/Done'
+import addImage from '../images/add.svg';
 
 function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
     
     const [tasks, setTasks]=useState([]);
-    const [todoPage, setTodoPage] = useState(true);
     const [newTaskTitle, setNewTaskTitle] = useState();
     const [newTaskDesc, setNewTaskDesc] = useState();
+    const [todoPage, setTodoPage] = useState('todo');
     const [search, setSearch] = useState('');
     user = JSON.parse(user);
 
+    async function addTask(){
+        const data = {
+            title: newTaskTitle,
+            description: newTaskDesc,
+            taskState: todoPage,
+            user: {
+                id:user.id
+            }
+        }
+        await axios.post('task', data)
+            .then(res=>{
+                console.log("succes");
+            }).catch(erreur=>{
+                DelUserFromLocalStorage();
+                console.log(erreur);
+            })
+        loadTasks()
+        
+    }
+
     async function loadTasks(){
+        tasks.length = 0
         await axios.get('task/user/'+user.id)
         .then(res =>{
             res.data.map(task=>{
@@ -22,7 +45,7 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
                     id: task.id,
                     title: task.title,
                     description: task.description,
-                    checked: task.done,
+                    taskState: task.taskState,
                 });
             })
         }).catch(erreur=>{
@@ -37,31 +60,7 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
         loadTasks();
       }, []);
 
-    async function addTask(){
-        const data = {
-            title: newTaskTitle,
-            description: newTaskDesc,
-            done: false,
-            user: {
-                id:user.id
-            }
-        }
-        await axios.post('task', data)
-            .then(res=>{
-                tasks.push({
-                    id: res.data.id,
-                    title: res.data.title,
-                    description: res.data.description,
-                    checked: res.data.done,
-                });
-            }).catch(erreur=>{
-                DelUserFromLocalStorage();
-                console.log(erreur);
-            })
-        
-        setTasks([...tasks]);
-        console.log(tasks)
-    }
+
 
     async function deleteTask(id){
         await axios.delete('task/'+id)
@@ -78,16 +77,16 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
         setTasks([...tasks]);
     }
 
-    async function checkTask(id){
+    async function moveTask(id,state){
         let data ={};
         for (let i=0;i<tasks.length;i++){
             if(tasks[i].id===id){
-                tasks[i].checked = true;
+                tasks[i].taskState = state;
                 data = {
                     id:id,
                     title: tasks[i].title,
                     description: tasks[i].description,
-                    done: tasks[i].checked,
+                    taskState: tasks[i].taskState,
                     user: {
                         id:user.id
                     }
@@ -114,43 +113,45 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
         }
     }
 
+
     return(
         <div className='todo-container'>
             <header className="header-bar">
                 <ul className="setting-link">
-                    <li className={todoPage ? "clicked-link" : null} onClick={()=>setTodoPage(true)}>To do</li>
-                    <li className={todoPage ? null :"clicked-link"} onClick={()=>setTodoPage(false)}>Done</li>
+                    <li className={todoPage==="todo"? "clicked-link":null} onClick={()=>setTodoPage("todo")}>To do</li>
+                    <li className={todoPage==="doing"? "clicked-link":null} onClick={()=>setTodoPage("doing")}>Doing</li>
+                    <li className={todoPage==="done"? "clicked-link":null} onClick={()=>setTodoPage("done")}>Done</li>
                 </ul>
                 <div className="search">
                     <input type='text' placeholder="Search" onChange={e=>setSearch(e.target.value)}/>
                     <i className="fa fa-search"></i>
                 </div>
             </header>
-            
-            {todoPage && 
-            <div className='add-task-field'>
-                <div className='input-task-field' >
-                    <input placeholder="Enter your task"  onChange={e=>setNewTaskTitle(e.target.value)}/>
-                    <textarea  placeholder = "Enter your description" onChange={e=>setNewTaskDesc(e.target.value)}/>
+
+            <div className= "todo-container">
+
+                <div className='add-task-field'>
+                    <div className='input-task-field' >
+                        <input placeholder="Enter your task"  onChange={e=>setNewTaskTitle(e.target.value)}/>
+                        <textarea  placeholder = "Enter your description" onChange={e=>setNewTaskDesc(e.target.value)}/>
+                    </div>
+                    <img className="add-button"  src={addImage} alt='ad' onClick={addTask}/>
                 </div>
-                <img className="add-button"  src={plus} alt='ad' onClick={addTask}/>
-            </div>}
-            
-            <div className='tasks-container'>
-                {
-                     tasks.map(task=>{ 
-                         if(!task.checked && todoPage){
-                             if (filterTasks(task)!==null){
-                                 return <Task task={task} deleteTask={deleteTask} checkButton='check-enable' checkTask={checkTask}/>
-                             }
-                         }
-                         if(task.checked && !todoPage){
-                            if (filterTasks(task)!==null){
-                                return <Task task={task} deleteTask={deleteTask} checkButton='check-enable' checkTask={checkTask}/>
-                            }
-                         }
-                     })
-                }
+                
+                    {todoPage==="todo"?       
+                        <Todo  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks}/>
+                        : null
+                    }
+                    {todoPage==="doing"?       
+                        <Doing  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks}/>
+                        : null
+                    }
+                    {todoPage==="done"?       
+                        <Done  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks}/>
+                        : null
+                    }
+                
+
             </div>
            
             

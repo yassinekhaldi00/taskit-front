@@ -5,10 +5,10 @@
 }
 .signup-container {
     padding: 0;
-    width: 400px;
+    width: 400px;   
     margin-left: auto;
     margin-right: auto;
-    margin-top: 35px;
+    margin-top: 50px;
     border-radius: 10px;
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
 }
@@ -20,24 +20,25 @@
     width: 85%;
     padding: 5%;
     margin: auto;
+    height: 400px;
 }
 .signup-form h3{
-    margin: 0;
+    margin: auto;
     color: var(--blue-color);
     text-align: center;
     font-weight: lighter;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
 }
 .signup-form input[type=text], .signup-form input[type=password], .signup-form input[type=email]{
     font-family: 'Questrial', sans-serif;
     color: var(--blue-color);
     margin: 9px;
     border-radius: 8px ;
-    height: 28px;
+    padding: 9px;
     border: solid #e4e4e4 0.5px;
     padding-left: 6px;
-    font-size: 0.8rem;
-}
+    font-size: 1rem;
+}   
 .signup-form input[type=text]:focus, .signup-form input[type=password]:focus, .signup-form input[type=email]:focus{
     outline: none;
     border-color: var(--red-color);
@@ -56,21 +57,20 @@
 .signup-form .agree label{
     position: absolute;
     top:3px;
-    font-size: 12px;
+    font-size: 0.9rem;
     margin: 0;
     
 }
 
 .signup-form p{
     color: var(--red-color);
-    font-size: 0.8rem;
     text-align: center;
 }
 
 
 .signup-form input[type=submit]{
     margin: auto;
-    margin-top: 10px;
+    margin-top: 20px;
     width: 50%;
     border-radius: 8px;
     border: none;

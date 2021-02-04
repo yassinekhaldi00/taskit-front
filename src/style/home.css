@@ -83,8 +83,9 @@ button{
         justify-content: center;
     }
 
-    .home-section img{
-        margin-top: 20px;
+    .home-section img{ 
+        margin-top: 50px;
+        width: 80%;
     }
     .home-section{
         text-align: center;
