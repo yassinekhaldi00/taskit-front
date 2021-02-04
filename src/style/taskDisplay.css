@@ -109,6 +109,7 @@ button{
     border: 2.5px solid;
     border-color: rgb(255, 214, 214);
     resize: none;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
 }
 .input-task-field input::placeholder, .input-task-field textarea::placeholder{
     color:rgb(189, 189, 189);
@@ -194,7 +195,7 @@ button{
     right: 0;
 }
 .menu-container .menu-ul{
-    width: 220px;
+    width: 200px;
     border-radius: 6px;
     padding: 0;
     background-color: rgb(255, 255, 255);
@@ -205,7 +206,7 @@ button{
 }
 
 .menu-ul li{
-    padding: 7px;
+    padding: 0px;
     border: 2px solid;
     border-color: var(--gray-color);
     background-color: white;
@@ -215,16 +216,61 @@ button{
     background-color: rgb(255, 214, 214);
 }
 
-.menu-ul img{
-    margin-right: 20px;
-    width: 17px;
+.img-span{
+    display: flex;
+    width: 100%;
+    height: 30px;
+}
+
+.img-span img{
+    width: 23px;
+    margin-right: 25px;
+    margin-left:5px ;
     vertical-align: middle;
 }
-.menu-ul span{
+
+.img-span span{
+    flex: 2;
     font-size: 0.9rem;
-    min-height: 20px;
-    display: inline-flex;
-    align-items: center;
+    margin: auto;
+}
+
+.rename{
+    position: relative;
+}
+.rename-form{
+    z-index: 2;
+    position: absolute;
+    top: 20px;
+    right: -327px;
+    background-color: var(--gray-color);
+    width: 320px;
+    padding: 0px;
+    border-radius: 6px;
+    border: 3px solid;
+    border-color: var(--gray-color);
+}
+.rename-form input, .rename-form textarea {
+    border: 2px solid;
+    border-color: var(--gray-color);
+    width: 96%;
+    font-family: 'Questrial', sans-serif;
+    padding-left: 7px;
+}
+.rename-form input{
+    height:26px;
+}
+.rename-form textarea{
+    height:39px;
+    resize: none;
+}
+.rename-form  input[type=submit]{
+    height: 30px;
+    cursor: pointer;
+    width: 100%;
+}
+.rename-form  input[type=submit]:hover{
+    background-color: rgb(255, 214, 214);
 }
 
 .move{
@@ -232,7 +278,7 @@ button{
 }
 
 .move-li{
-    width: 150px;
+    width: 100px;
     border-radius: 6px;
     padding: 0;
     background-color: rgb(255, 255, 255);
@@ -243,8 +289,18 @@ button{
     z-index: 2;
     position: absolute;
     top: 0px;
-    right: -160px;
+    right: -110px;
 }
+
+.move-li li{
+    display: flex;
+    font-size: 0.9rem;
+    min-height: 25px;
+}
+.move-li span{
+    margin:auto;
+}
+
 .tasks-container .expand-desc{
     font-family: 'Questrial', sans-serif;
     resize: none;

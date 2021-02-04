@@ -101,6 +101,31 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
             })
     }
 
+    async function renameTask(id, title, description){
+        let data ={};
+        for (let i=0;i<tasks.length;i++){
+            if(tasks[i].id===id){
+                tasks[i].title = title;
+                tasks[i].description = description
+                data = {
+                    id:id,
+                    title: tasks[i].title,
+                    description: tasks[i].description,
+                    taskState: tasks[i].taskState,
+                    user: {
+                        id:user.id
+                    }
+                }
+                console.log(tasks[i]);
+            }
+        }
+        await axios.put('task', data)
+            .then(res=>{
+                console.log(res);
+                setTasks([...tasks]);
+            })
+    }
+
     function filterTasks(task){
         if (search !=='' && task.title !== null){
             if (task.title.toLowerCase().indexOf(search.toLowerCase()) !==-1){
@@ -139,15 +164,15 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
                 </div>
                 
                     {todoPage==="todo"?       
-                        <Todo  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks}/>
+                        <Todo  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks} renameTask={renameTask}/>
                         : null
                     }
                     {todoPage==="doing"?       
-                        <Doing  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks}/>
+                        <Doing  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks} renameTask={renameTask}/>
                         : null
                     }
                     {todoPage==="done"?       
-                        <Done  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks}/>
+                        <Done  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks} renameTask={renameTask}/>
                         : null
                     }
                 

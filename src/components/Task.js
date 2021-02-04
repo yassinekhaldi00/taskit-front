@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import check from '../images/check.png';
-import expandImage from '../images/expand.png';
+import expandImage from '../images/expand.svg';
 import Delete from '../images/delete.png';
 import menuImage from '../images/menu.png';
 import renameImage from '../images/rename.svg';
@@ -11,22 +11,10 @@ export default function Task(props){
 
     const [expand, setExpand] = useState(false);
     const [openMenu, setOpenMenu] = useState(false);
-    const [openMove, setOpenMove] = useState(false)
-
-    function MoveList(taskState){
-        let list = ["todo","doing", "done"]
-        for  (const item in list) {
-            if (item === taskState){
-                return (
-                    <ul className="move-li">
-                        <li>doing</li>
-                        <li>done</li>
-                    </ul>
-                )
-            }   
-        }
-    }
-
+    const [openMove, setOpenMove] = useState(false);
+    const [openRename, setOpenRename] = useState(false);
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
 
     return(
         <div className='task-container'>
@@ -40,22 +28,41 @@ export default function Task(props){
             {openMenu && 
                 <div className="menu-container">
                     <ul className="menu-ul">
-                        <li><img src={renameImage} /><span>Rename</span></li>
-                        <li onClick={()=>props.deleteTask(props.task.id) && setOpenMenu(false)}>
-                            <img src={deleteImage} />
-                            <span>Delete</span>
+                        <li classnName= "rename" >
+                            <div className="img-span" onClick={()=>setOpenRename(!openRename)}>
+                                <img src={renameImage} />
+                                <span>Rename</span>
+                            </div>
+                            {openRename && 
+                                <form className="rename-form" onSubmit={(event)=>props.renameTask(props.task.id, title, description) && event.preventDefault()}>
+                                    <input placeholder="Enter title" type="text" onChange={e=>setTitle(e.target.value)}/>
+                                    <textarea placeholder="Enter description" onChange={e=>setDescription(e.target.value)}/>
+                                    <input type="submit" value="Rename"></input>
+                                </form>
+                            }
                         </li>
+
+                        <li onClick={()=>props.deleteTask(props.task.id) && setOpenMenu(false)}>
+                            <div className="img-span">
+                                <img src={deleteImage} />
+                                <span>Delete</span>
+                            </div>
+                        </li>
+
                         <li className="move" onClick={()=>setOpenMove(!openMove)}>
-                            <img src={moveImage} /> 
-                            <span>Move to</span>
+                            <div className="img-span">
+                                <img src={moveImage} /> 
+                                <span>Move to</span>
+                            </div>
                             {openMove && 
                                 <ul className="move-li">
-                                    {props.task.taskState !== "todo" && <li onClick={()=>props.moveTask(props.task.id,"todo")}>To do</li>}
-                                    {props.task.taskState !== "doing" &&<li onClick={()=>props.moveTask(props.task.id,"doing")}>Doing</li>}
-                                    {props.task.taskState !== "done" &&<li onClick={()=>props.moveTask(props.task.id,"done")}>Done</li>}
+                                    {props.task.taskState !== "todo" && <li onClick={()=>props.moveTask(props.task.id,"todo")}><span>To do</span></li>}
+                                    {props.task.taskState !== "doing" &&<li onClick={()=>props.moveTask(props.task.id,"doing")}><span>Doing</span></li>}
+                                    {props.task.taskState !== "done" &&<li onClick={()=>props.moveTask(props.task.id,"done")}><span>Done</span></li>}
                                 </ul>
                             }
                         </li>
+
                     </ul>
                 </div>
             }
