@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../style/taskDisplay.css';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import Todo from '../subPages/Todo'
-import Doing from '../subPages/Doing'
-import Done from '../subPages/Done'
 import addImage from '../images/add.svg';
+import Task from '../components/Task';
 
 function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
     
@@ -16,14 +14,19 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
     const [search, setSearch] = useState('');
     user = JSON.parse(user);
 
+    useEffect(() => {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+        loadTasks();
+      }, []);
+
     async function addTask(){
         const data = {
             title: newTaskTitle,
             description: newTaskDesc,
             taskState: todoPage,
-            user: {
-                id:user.id
-            }
+            user: [{
+                    id:user.id
+            }]
         }
         await axios.post('task', data)
             .then(res=>{
@@ -46,6 +49,7 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
                     title: task.title,
                     description: task.description,
                     taskState: task.taskState,
+                    user: task.user
                 });
             })
         }).catch(erreur=>{
@@ -53,77 +57,6 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
             console.log(erreur);
         })
         setTasks([...tasks]);
-    }
-
-    useEffect(() => {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-        loadTasks();
-      }, []);
-
-
-
-    async function deleteTask(id){
-        await axios.delete('task/'+id)
-            .then(res=>{
-                for (let i=0;i<tasks.length;i++){
-                    if(tasks[i].id===id){
-                        tasks.splice(i,1);
-                    }
-                }
-            }).catch(erreur=>{
-                DelUserFromLocalStorage();
-                console.log(erreur);
-            })
-        setTasks([...tasks]);
-    }
-
-    async function moveTask(id,state){
-        let data ={};
-        for (let i=0;i<tasks.length;i++){
-            if(tasks[i].id===id){
-                tasks[i].taskState = state;
-                data = {
-                    id:id,
-                    title: tasks[i].title,
-                    description: tasks[i].description,
-                    taskState: tasks[i].taskState,
-                    user: {
-                        id:user.id
-                    }
-                }
-                console.log(tasks[i]);
-            }
-        }
-        await axios.put('task', data)
-            .then(res=>{
-                console.log(res);
-                setTasks([...tasks]);
-            })
-    }
-
-    async function renameTask(id, title, description){
-        let data ={};
-        for (let i=0;i<tasks.length;i++){
-            if(tasks[i].id===id){
-                tasks[i].title = title;
-                tasks[i].description = description
-                data = {
-                    id:id,
-                    title: tasks[i].title,
-                    description: tasks[i].description,
-                    taskState: tasks[i].taskState,
-                    user: {
-                        id:user.id
-                    }
-                }
-                console.log(tasks[i]);
-            }
-        }
-        await axios.put('task', data)
-            .then(res=>{
-                console.log(res);
-                setTasks([...tasks]);
-            })
     }
 
     function filterTasks(task){
@@ -163,18 +96,17 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
                     <img className="add-button"  src={addImage} alt='ad' onClick={addTask}/>
                 </div>
                 
-                    {todoPage==="todo"?       
-                        <Todo  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks} renameTask={renameTask}/>
-                        : null
+                <div className='tasks-container'>
+                    {
+                        tasks.map(task=>{ 
+                            if(task.taskState === todoPage){
+                                if (filterTasks(task)!==null){
+                                    return <Task task={task}  loadTasks={loadTasks} />
+                                }
+                            }
+                        })
                     }
-                    {todoPage==="doing"?       
-                        <Doing  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks} renameTask={renameTask}/>
-                        : null
-                    }
-                    {todoPage==="done"?       
-                        <Done  tasks={tasks} deleteTask={deleteTask} moveTask={moveTask} filterTasks={filterTasks} renameTask={renameTask}/>
-                        : null
-                    }
+                </div>
                 
 
             </div>

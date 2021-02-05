@@ -175,7 +175,6 @@ button{
 .img-container img{
     margin: auto;
     width:20px;
-    height: 20x;
     cursor: pointer;
     transition: 0.3s ease-in-out;
 }
@@ -299,6 +298,39 @@ button{
 }
 .move-li span{
     margin:auto;
+}
+
+.share{
+    position: relative;
+}
+.share-form{
+    z-index: 2;
+    position: absolute;
+    top: 120px;
+    right: -327px;
+    background-color: var(--gray-color);
+    width: 320px;
+    padding: 0px;
+    border-radius: 6px;
+    border: 3px solid;
+    border-color: var(--gray-color);
+}
+.share-form input{
+    border: 2px solid;
+    border-color: var(--gray-color);
+    width: 96%;
+    font-family: 'Questrial', sans-serif;
+    padding-left: 7px;
+    height:26px;
+}
+
+.share-form  input[type=submit]{
+    height: 30px;
+    cursor: pointer;
+    width: 100%;
+}
+.share-form  input[type=submit]:hover{
+    background-color: rgb(255, 214, 214);
 }
 
 .tasks-container .expand-desc{
