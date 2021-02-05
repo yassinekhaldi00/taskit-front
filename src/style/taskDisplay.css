@@ -144,32 +144,45 @@ button{
     grid-template-columns: repeat(auto-fit,minmax(350px, 0.4fr));
 }
 
-.task{
-    margin-top: 20px;
-    display: flex;
-    height: 40px;
+.task-box{
+    margin-top: 7px;
+    height: 75px;
     border-radius: 6px;
     background-color: #F3F3F3;
-    padding-left:5px;
+}
+
+.task{
+    display: flex;
+    height: 50%;
+    border-radius: 6px;
     justify-content: space-between;
+    width: 96%;
+    float: right;
 }
 
 .task input{
     background-color: #F3F3F3;
-    height: 90%;
     flex: 3;
     margin: auto;
     border: none;
     font-size: 1rem;
+  
 }
 .task ::placeholder{
     font-family: 'Questrial', sans-serif;
 }
+.task-users{
+    width: 95%;
+}
+.task-users .avatar{
+    font-family: 'Questrial', sans-serif;
+    float: right;
+}
+
 
 .img-container{
     flex: 1;
     display: flex;
-    width: 30%;
 }
 
 .img-container img{
@@ -332,11 +345,15 @@ button{
 .share-form  input[type=submit]:hover{
     background-color: rgb(255, 214, 214);
 }
-
+.share-form  p{
+    color: var(--red-color);
+    font-size: 0.8rem;
+    text-align: center;
+}
 .tasks-container .expand-desc{
     font-family: 'Questrial', sans-serif;
     resize: none;
-    width: 90%;
+    width: 94%;
     height: 80px;
     background-color: #FFDDDD;
     display: block;

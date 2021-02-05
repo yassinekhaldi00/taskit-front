@@ -101,7 +101,7 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
                         tasks.map(task=>{ 
                             if(task.taskState === todoPage){
                                 if (filterTasks(task)!==null){
-                                    return <Task task={task}  loadTasks={loadTasks} />
+                                    return <Task task={task}  loadTasks={loadTasks} user={user}/>
                                 }
                             }
                         })

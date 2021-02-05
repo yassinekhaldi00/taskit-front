@@ -6,6 +6,7 @@ import deleteImage from '../images/delete.svg';
 import moveImage from '../images/move.svg';
 import shareImage from '../images/share.svg';
 import axios from 'axios';
+import Avatar from 'react-avatar';
 
 export default function Task(props){
 
@@ -55,16 +56,30 @@ export default function Task(props){
             .then(res=>{
                 setValidEmail(res.data);
             })
+            props.loadTasks()
     }
 
 
     return(
         <div className='task-container'>
-            <div className='task' id = {props.task.id}>
-                <input type='text' value={props.task.title} onChange={event=>props.task.title=event.target.value} disabled/>
-                <div className='img-container'>
-                    <img className={expand ? 'up': 'down'} src={expandImage} alt='expand' onClick={()=>setExpand(!expand)}/>
-                    <img className='check-enable'  src={menuImage} alt='menu' onClick={()=>setOpenMenu(!openMenu)}/>
+            <div className='task-box' id = {props.task.id}>
+                <div className='task'>
+                    <input type='text' value={props.task.title} onChange={event=>props.task.title=event.target.value} disabled/>
+                    <div className='img-container'>
+                        <img className={expand ? 'up': 'down'} src={expandImage} alt='expand' onClick={()=>setExpand(!expand)}/>
+                        <img className='check-enable'  src={menuImage} alt='menu' onClick={()=>setOpenMenu(!openMenu)}/>
+                    </div>
+                </div>
+                
+                <div className="task-users">
+                    {
+                        props.task.user.map(user=>{
+                            if(user.id !== props.user.id){
+                                let name = props.user.firstName +" "+props.user.lastName
+                                return <Avatar className ="avatar" name={name} size="28" round={true} color={Avatar.getRandomColor('sitebase', ['rgb(255, 214, 214)','#F39595'])}  fgColor="black" textSizeRatio={2.3} />
+                            }
+                        })
+                    }
                 </div>
             </div>
             {openMenu && 
