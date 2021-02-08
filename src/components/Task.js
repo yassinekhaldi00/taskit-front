@@ -6,7 +6,7 @@ import deleteImage from '../images/delete.svg';
 import moveImage from '../images/move.svg';
 import shareImage from '../images/share.svg';
 import axios from 'axios';
-import Avatar from 'react-avatar';
+import Avatar , { ConfigProvider } from 'react-avatar';
 
 export default function Task(props){
 
@@ -59,15 +59,40 @@ export default function Task(props){
             props.loadTasks()
     }
 
+    function menuClick(){
+        setOpenShare(false);
+        setOpenMove(false)
+        setOpenRename(false);
+        setOpenMenu(!openMenu)
+    }
+
+    function renameClick(){
+        setOpenShare(false);
+        setOpenMove(false)
+        setOpenRename(!openRename);
+    }
+
+    function moveClick(){
+        setOpenShare(false);
+        setOpenRename(false);
+        setOpenMove(!openMove);
+    }
+    
+    function shareClick(){
+        setOpenRename(false);
+        setOpenMove(false);
+        setOpenShare(!openShare);
+    }
 
     return(
+        <ConfigProvider colors={['#F39595', '#f0b4b4', '#f08686']}>
         <div className='task-container'>
             <div className='task-box' id = {props.task.id}>
                 <div className='task'>
                     <input type='text' value={props.task.title} onChange={event=>props.task.title=event.target.value} disabled/>
                     <div className='img-container'>
                         <img className={expand ? 'up': 'down'} src={expandImage} alt='expand' onClick={()=>setExpand(!expand)}/>
-                        <img className='check-enable'  src={menuImage} alt='menu' onClick={()=>setOpenMenu(!openMenu)}/>
+                        <img className='check-enable'  src={menuImage} alt='menu' onClick={menuClick}/>
                     </div>
                 </div>
                 
@@ -75,8 +100,10 @@ export default function Task(props){
                     {
                         props.task.user.map(user=>{
                             if(user.id !== props.user.id){
-                                let name = props.user.firstName +" "+props.user.lastName
-                                return <Avatar className ="avatar" name={name} size="28" round={true} color={Avatar.getRandomColor('sitebase', ['rgb(255, 214, 214)','#F39595'])}  fgColor="black" textSizeRatio={2.3} />
+                                let name = user.firstName +" "+user.lastName
+                                return (
+                                    <Avatar className ="avatar" name={name} size="28" round={true} textSizeRatio={2.3} />
+                                )
                             }
                         })
                     }
@@ -87,7 +114,7 @@ export default function Task(props){
                     <ul className="menu-ul">
 
                         <li classnName= "rename" >
-                            <div className="img-span" onClick={()=>setOpenRename(!openRename)}>
+                            <div className="img-span" onClick={renameClick}>
                                 <img src={renameImage} />
                                 <span>Rename</span>
                             </div>
@@ -107,7 +134,7 @@ export default function Task(props){
                             </div>
                         </li>
 
-                        <li className="move" onClick={()=>setOpenMove(!openMove)}>
+                        <li className="move" onClick={moveClick}>
                             <div className="img-span">
                                 <img src={moveImage} /> 
                                 <span>Move to</span>
@@ -122,7 +149,7 @@ export default function Task(props){
                         </li>
 
                         <li classnName= "share" >
-                            <div className="img-span" onClick={()=> setOpenShare(!openShare)}>
+                            <div className="img-span" onClick={shareClick}>
                                 <img src={shareImage} />
                                 <span>Share with</span>
                             </div>
@@ -140,5 +167,6 @@ export default function Task(props){
             }
             <textarea className={expand ? 'expand-desc' : 'desc'}  value={props.task.description} onChange={event=>props.task.description=event.target.value} disabled></textarea>
         </div>
+        </ConfigProvider>
     )
 }

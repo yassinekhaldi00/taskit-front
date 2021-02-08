@@ -172,13 +172,17 @@ button{
     font-family: 'Questrial', sans-serif;
 }
 .task-users{
-    width: 95%;
+    display: grid;
+    grid-template-columns: repeat(12,minmax(40px,auto));
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    
 }
 .task-users .avatar{
     font-family: 'Questrial', sans-serif;
-    float: right;
+    box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.25);
 }
-
 
 .img-container{
     flex: 1;

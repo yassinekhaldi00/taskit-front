@@ -32,7 +32,7 @@ export default function Account(props){
             <hr/>
             <p>Once you delete your account, there is no going back. Please be certain.</p>
             <button onClick={()=>setPopup(true)}>Delete your account</button>
-            <Modal visible={popup} width="400" height="150" onClickAway={() => setPopup(false)}>
+            <Modal visible={popup} width="500" height="200" onClickAway={() => setPopup(false)}>
                 <div className='popup'>
                     <p>Enter your password</p>
                     <input type="password" onChange={e=>setPassword(e.target.value)}/>
