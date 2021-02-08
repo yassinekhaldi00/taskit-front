@@ -146,14 +146,15 @@ button{
 
 .task-box{
     margin-top: 7px;
-    height: 75px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-radius: 6px;
     background-color: #F3F3F3;
 }
 
 .task{
     display: flex;
-    height: 50%;
+    height: 35%;
     border-radius: 6px;
     justify-content: space-between;
     width: 96%;
@@ -173,10 +174,12 @@ button{
 }
 .task-users{
     display: grid;
-    grid-template-columns: repeat(12,minmax(40px,auto));
+    grid-template-columns: repeat(11,minmax(20px,auto));
     width: 90%;
+    gap: 10px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 35px;
     
 }
 .task-users .avatar{
