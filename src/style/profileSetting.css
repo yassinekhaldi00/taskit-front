@@ -23,11 +23,18 @@ button{
 
 .setting-links li{
     padding: 5px;
+    font-size: 1.1rem;
 }
 
 .setting-links .clicked-link{
     border-bottom: solid 2px;
     border-color: var(--red-color);
+    font-size: 1.4rem;
+}
+
+.setting-links li:hover{
+    font-size: 1.4rem;
+    transition: font-size .35s ease-in-out;
 }
 
 .form-container{
@@ -37,17 +44,17 @@ button{
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 30px 2px rgba(0, 0, 0, 0.07);
 }
 .form-container h1{
-    font-size: 2rem;
-    margin: 0;
-    font-family: 'Questrial', sans-serif;
+    font-size: 1.7rem;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
 }
 .form-container hr{
     height: 1px;
     border: 0;
-    border-top: 2px solid #ccc;
+    border-top: 1.5px solid #ccc;
     margin: 1em 0;
     padding: 0;
 }
@@ -152,7 +159,12 @@ button{
 
 @media only screen and (max-width: 800px){
     .setting-links{
-        width: 20rem;
+    
+        padding-left: 10px;
+        justify-content: left;
+    }
+    .setting-links li{
+        margin-right: 40px;
     }
     .form-container{
         width:85%;
@@ -166,6 +178,9 @@ button{
     }
     .account-container{
         width: 90%;
+    }
+    .form-container{
+        box-shadow: none;
     }
     
 }

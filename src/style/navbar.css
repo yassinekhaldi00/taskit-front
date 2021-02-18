@@ -8,16 +8,17 @@
     padding:0;
     font-family: 'Questrial', sans-serif;
     font-size: 13px;
+    border-bottom: solid 1px;
+    border-color: #f0ecec;
 }
 
 .navbar-container nav{
-    height: 8vh;
+    height: 60px;
     width:90%;
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 20px;
 }
 
 .navbar-container .logo{
@@ -46,10 +47,14 @@
     align-items: center;
 }
 
+.navbar-container .avatar{
+    margin-left: -10px;
+}
 
 .navbar-container .link{
     color: black;
     text-decoration: none;
+    transition: 0.3s ease-in-out;
 }
 
 .navbar-container .signup{
@@ -85,11 +90,11 @@
     .nav-list-drop{
         z-index: 5;
         position: absolute;
-        right: 0;
-        top: 50px;
+        right: 10%;
+        top: 60px;
         background-color: var(--red-color);
         opacity: 0.9;
-        width: 100%;
+        width: 80%;
         transition: all 0.8s ease;
     }
     .nav-list-drop ul{
@@ -107,7 +112,7 @@
         padding: 15px 0 15px 0;
     }
 
-    .nav-list-drop .link {
+    .nav-list-drop .link  {
         color: white;
         text-decoration: none;
         margin: 0;
@@ -117,10 +122,17 @@
         width:100%;
         padding-top: 1.2rem;
         padding-bottom: 1.2rem;
-        transition: all 0.8s ease;
+        font-size: 1.1rem;
+    }
+
+    .nav-list-drop li:hover {
+        background-color: rgb(255, 110, 110);
+        
     }
 
     .nav-list-drop .signup{
         padding: 15px 0 15px 0;
+        border-radius: 0px;
+        border: none;
     }
 }  

@@ -1,12 +1,15 @@
-import React, { useState , useEffect} from 'react';
-import{NavLink, Redirect} from 'react-router-dom'
+import React, { useState} from 'react';
+import{NavLink} from 'react-router-dom'
 import '../style/navbar.css';
 import logo from '../images/logo.png';
+import Avatar  from 'react-avatar';
 
 
 function Navbar(props){
 
     const [dropMenu, setDropMenu] = useState(false);
+    const user = JSON.parse(props.user);
+    const userName = user.firstName + " " + user.lastName; 
 
     function MenuItems(){
 
@@ -14,7 +17,10 @@ function Navbar(props){
             return (
                 <ul>
                     <li><NavLink className='link' to ='/taskdisplay'> Home </NavLink></li>
-                    <li><NavLink className='link' to ='/setting'> {JSON.parse(props.user).firstName} </NavLink></li>
+                    <li><NavLink className='link' to ='/setting'> 
+                        <Avatar className ="avatar" name={userName} size="28" round={true} textSizeRatio={2.3} color="#F39595"/>{
+                        user.firstName}
+                    </NavLink></li>
                     <li className='signup'><NavLink className='link'to='/Login' onClick={props.DelUserFromLocalStorage}>Logout </NavLink></li>
                 </ul>
             )

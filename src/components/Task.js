@@ -6,7 +6,7 @@ import deleteImage from '../images/delete.svg';
 import moveImage from '../images/move.svg';
 import shareImage from '../images/share.svg';
 import axios from 'axios';
-import Avatar , { ConfigProvider } from 'react-avatar';
+import Avatar  from 'react-avatar';
 import { motion } from "framer-motion";
 
 export default function Task(props){
