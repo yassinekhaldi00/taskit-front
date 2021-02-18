@@ -23,7 +23,7 @@ button{
 }
 .header-bar .setting-link{
     width: 40rem;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     display: flex;
     margin: auto;
     justify-content: space-evenly;
@@ -36,36 +36,44 @@ button{
 .header-bar .setting-link li{
     padding: 5px;
 }
+.header-bar .setting-link li:hover{
+    font-size: 1.4rem;
+    transition: font-size .35s ease-in-out;
+}
 
 .header-bar .clicked-link{
+    font-size: 1.4rem;
     border-bottom: solid 2px;
     border-color: var(--red-color);
 }
 .header-bar .search{
     position: absolute;
-    right: 0px;
-    border: solid 1px;
-    border-radius: 7px;
+    right: 5px;
+    border-radius: 5px;
     padding: 4px;
     border-color: #e2d9d9;
 }
-.search input{
-    width: 140px;
+.search-input{
+    width: 0;
     padding: 1px;
     font-size: 0.9rem;
     padding-left: 10px;
     border: none;
+    transition: all .35s ease-in-out;
 }
-.search input:focus{
+.search-input:focus{
     outline: none;
 }
-.search:focus-within {
-    border-color: var(--red-color);
+.search:hover{  
+    box-shadow: 0 0 20px 1px rgba(243, 149, 149, 0.5);
 }
-.search input:focus + i{
+.search:hover > .search-input{  
+    width: 140px;
+}
+.search:hover > i{
     color: var(--red-color);
 }
-.search input::placeholder{
+.search-input::placeholder{
     color: rgb(213, 213, 213);
 }
 .search i{
@@ -106,10 +114,10 @@ button{
     border-radius: 3px;
     border: none;
     background-color: white;
-    border: 2.5px solid;
-    border-color: rgb(255, 214, 214);
+    border: 2px solid;
+    border-color: white;
     resize: none;
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1);
 }
 .input-task-field input::placeholder, .input-task-field textarea::placeholder{
     color:rgb(189, 189, 189);
@@ -138,7 +146,7 @@ button{
 .tasks-container{
     width: 90%;
     margin: auto;
-    margin-top: 8px;
+    margin-top: 25px;
     display: grid;    
     gap: 1.5rem;
     grid-template-columns: repeat(auto-fit,minmax(350px, 0.4fr));
@@ -149,7 +157,8 @@ button{
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 6px;
-    background-color: #F3F3F3;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.1);
+  
 }
 
 .task{
@@ -162,7 +171,7 @@ button{
 }
 
 .task input{
-    background-color: #F3F3F3;
+    background-color: white;
     flex: 3;
     margin: auto;
     border: none;
@@ -396,6 +405,7 @@ button:focus{
 }
 
 @media only screen and (max-width: 800px){
+
     .header-bar .setting-link{
         margin:0;
         padding-left: 10px;
@@ -405,6 +415,6 @@ button:focus{
         margin-right: 40px;
     }
     .tasks-container{
-        grid-template-columns: repeat(auto-fit,minmax(230px, 1fr));
+        grid-template-columns: repeat(auto-fit,minmax(270px, 1fr));
     }
 }

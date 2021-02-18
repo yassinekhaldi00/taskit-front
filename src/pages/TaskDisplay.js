@@ -56,7 +56,7 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
             DelUserFromLocalStorage();
             console.log(erreur);
         })
-        setTasks([...tasks]);
+        setTasks([...tasks.reverse()]);
     }
 
     function filterTasks(task){
@@ -81,8 +81,8 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
                     <li className={todoPage==="done"? "clicked-link":null} onClick={()=>setTodoPage("done")}>Done</li>
                 </ul>
                 <div className="search">
-                    <input type='text' placeholder="Search" onChange={e=>setSearch(e.target.value)}/>
-                    <i className="fa fa-search"></i>
+                    <input className="search-input" type='text' placeholder="Search" onChange={e=>setSearch(e.target.value)}/>
+                    <i  className="fa fa-search"></i>
                 </div>
             </header>
 

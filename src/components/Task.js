@@ -7,6 +7,7 @@ import moveImage from '../images/move.svg';
 import shareImage from '../images/share.svg';
 import axios from 'axios';
 import Avatar , { ConfigProvider } from 'react-avatar';
+import { motion } from "framer-motion";
 
 export default function Task(props){
 
@@ -27,7 +28,8 @@ export default function Task(props){
             .then(res=>{
                 console.log(res);
             })
-        props.loadTasks()
+        props.loadTasks();
+        menuClick();
     }
     
     async function deleteTask(){
@@ -37,7 +39,8 @@ export default function Task(props){
             }).catch(erreur=>{
                 console.log(erreur);
             })
-            props.loadTasks()
+            props.loadTasks();
+            menuClick();
     }
 
     
@@ -48,6 +51,7 @@ export default function Task(props){
                 console.log(res);
             })
         props.loadTasks()
+        menuClick();
     }
 
     async function shareTask(email){
@@ -56,7 +60,8 @@ export default function Task(props){
             .then(res=>{
                 setValidEmail(res.data);
             })
-            props.loadTasks()
+            props.loadTasks();
+            menuClick();
     }
 
     function menuClick(){
@@ -85,9 +90,8 @@ export default function Task(props){
     }
 
     return(
-        <ConfigProvider colors={['#F39595', '#f0b4b4', '#f08686']}>
         <div className='task-container'>
-            <div className='task-box' id = {props.task.id}>
+            <motion.div className='task-box' id = {props.task.id}  initial={{ opacity: 0 }} animate={{ opacity:1}}  transition={{delay:0.3}}>
                 <div className='task'>
                     <input type='text' value={props.task.title} onChange={event=>props.task.title=event.target.value} disabled/>
                     <div className='img-container'>
@@ -108,9 +112,9 @@ export default function Task(props){
                         })
                     }
                 </div>
-            </div>
+            </motion.div>
             {openMenu && 
-                <div className="menu-container">
+                <motion.div className="menu-container"  initial={{scale:0.6, opacity:0 }} animate={{scale:1, opacity:1}} >
                     <ul className="menu-ul">
 
                         <li classnName= "rename" >
@@ -163,10 +167,9 @@ export default function Task(props){
                         </li>
 
                     </ul>
-                </div>
+                </motion.div>
             }
             <textarea className={expand ? 'expand-desc' : 'desc'}  value={props.task.description} onChange={event=>props.task.description=event.target.value} disabled></textarea>
         </div>
-        </ConfigProvider>
     )
 }
