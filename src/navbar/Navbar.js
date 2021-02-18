@@ -9,7 +9,7 @@ function Navbar(props){
 
     const [dropMenu, setDropMenu] = useState(false);
     const user = JSON.parse(props.user);
-    const userName = user.firstName + " " + user.lastName; 
+    const userName = props.user ? user.firstName + " " + user.lastName : ""; 
 
     function MenuItems(){
 
