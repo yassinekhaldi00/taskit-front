@@ -10,6 +10,7 @@ function Navbar(props){
     const [dropMenu, setDropMenu] = useState(false);
     const user = JSON.parse(props.user);
     const userName = props.user ? user.firstName + " " + user.lastName : ""; 
+    const firstName = props.user ? user.firstName : "";
 
     function MenuItems(){
 
@@ -19,7 +20,7 @@ function Navbar(props){
                     <li><NavLink className='link' to ='/taskdisplay'> Home </NavLink></li>
                     <li><NavLink className='link' to ='/setting'> 
                         <Avatar className ="avatar" name={userName} size="28" round={true} textSizeRatio={2.3} color="#F39595"/>{
-                        user.firstName}
+                        firstName}
                     </NavLink></li>
                     <li className='signup'><NavLink className='link'to='/Login' onClick={props.DelUserFromLocalStorage}>Logout </NavLink></li>
                 </ul>
@@ -34,6 +35,7 @@ function Navbar(props){
             )
         }
     }
+    
     return(
         <div className ='navbar-container' >
             <nav>

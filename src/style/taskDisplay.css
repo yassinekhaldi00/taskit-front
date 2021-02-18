@@ -35,10 +35,10 @@ button{
 
 .header-bar .setting-link li{
     padding: 5px;
+    transition: font-size .35s ease-in-out;
 }
 .header-bar .setting-link li:hover{
     font-size: 1.4rem;
-    transition: font-size .35s ease-in-out;
 }
 
 .header-bar .clicked-link{
@@ -155,7 +155,7 @@ button{
     margin: auto;
     margin-top: 25px;
     display: grid;    
-    gap: 1.5rem;
+    gap: 4.8rem;
     grid-template-columns: repeat(auto-fit,minmax(350px, 0.4fr));
 }
 
@@ -222,6 +222,24 @@ button{
 .task-container{
     position: relative;
 
+}
+.menu-open-enter{
+    scale:0.6;
+    opacity:0;
+}
+.menu-open-enter-active{
+    scale:1;
+    opacity:1;
+    transition: all 400ms;
+}
+.menu-open-exit{
+    scale:1;
+    opacity:1;
+    transition: all 400ms;
+}
+.menu-open-exit-active{
+    scale:0.6;
+    opacity:0;
 }
 .menu-container {
     z-index: 2;
@@ -373,11 +391,10 @@ button{
     font-size: 0.8rem;
     text-align: center;
 }
-.tasks-container .expand-desc{
+.tasks-container .txtarea{
     font-family: 'Questrial', sans-serif;
     resize: none;
     width: 94%;
-    height: 80px;
     background-color: #FFDDDD;
     display: block;
     margin: auto;
@@ -385,21 +402,44 @@ button{
     border: none;
     border-radius: 0 0 5px 5px;
     font-size: 0.9rem;
-    animation-name: dropDown;
-    animation-duration: 0.5s;
+
 }
+
 button:focus{
     outline: none;
 }
 .task input:focus, .tasks-container textarea:focus{
     outline: none;
 }
-.tasks-container .desc{
-    animation-name: dropUp;
-    animation-duration: 0.5s;
-    opacity: 0;
-    visibility: hidden;
+.drop { 
+    height: 80px;
 }
+.drop-enter { 
+    opacity: 0;
+    height: 0;
+}
+    
+.drop-enter-active {
+    opacity: 1;
+    height: 80px;
+    transition: all 500ms;
+}
+.drop-enter-done{
+    opacity: 1;
+    height: 80px;
+
+}
+.drop-exit {
+    height: 80px;
+    opacity: 1;
+}
+
+.drop-exit-active {
+    opacity: 0;
+    height: 0;
+    transition: all 500ms;
+}
+
 
 @keyframes dropDown{
     from{resize: none;

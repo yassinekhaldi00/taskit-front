@@ -24,6 +24,7 @@ button{
 .setting-links li{
     padding: 5px;
     font-size: 1.1rem;
+    transition: font-size .35s ease-in-out;
 }
 
 .setting-links .clicked-link{
@@ -34,7 +35,6 @@ button{
 
 .setting-links li:hover{
     font-size: 1.4rem;
-    transition: font-size .35s ease-in-out;
 }
 
 .form-container{

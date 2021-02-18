@@ -8,6 +8,7 @@ import shareImage from '../images/share.svg';
 import axios from 'axios';
 import Avatar  from 'react-avatar';
 import { motion } from "framer-motion";
+import { CSSTransition } from 'react-transition-group';
 
 export default function Task(props){
 
@@ -15,8 +16,8 @@ export default function Task(props){
     const [openMenu, setOpenMenu] = useState(false);
     const [openMove, setOpenMove] = useState(false);
     const [openRename, setOpenRename] = useState(false);
-    const [title, setTitle] = useState();
-    const [description, setDescription] = useState();
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [openShare, setOpenShare] = useState(false);
     const [email, setEmail] = useState();
     const [validEmail, setValidEmail] = useState(true);
@@ -113,8 +114,8 @@ export default function Task(props){
                     }
                 </div>
             </motion.div>
-            {openMenu && 
-                <motion.div className="menu-container"  initial={{scale:0.6, opacity:0 }} animate={{scale:1, opacity:1}} >
+            <CSSTransition in={openMenu} classNames="menu-open"   timeout={300} unmountOnExit > 
+                <div className="menu-container" >
                     <ul className="menu-ul">
 
                         <li classnName= "rename" >
@@ -122,13 +123,13 @@ export default function Task(props){
                                 <img src={renameImage} />
                                 <span>Rename</span>
                             </div>
-                            {openRename && 
+                            <CSSTransition in={openRename} classNames="menu-open"   timeout={300} unmountOnExit > 
                                 <form className="rename-form" onSubmit={(event)=>renameTask(title, description) && event.preventDefault()}>
                                     <input placeholder="Enter title" type="text" onChange={e=>setTitle(e.target.value)}/>
                                     <textarea placeholder="Enter description" onChange={e=>setDescription(e.target.value)}/>
                                     <input type="submit" value="Rename"></input>
                                 </form>
-                            }
+                            </CSSTransition>
                         </li>
 
                         <li onClick={()=>deleteTask() && setOpenMenu(false)}>
@@ -143,13 +144,13 @@ export default function Task(props){
                                 <img src={moveImage} /> 
                                 <span>Move to</span>
                             </div>
-                            {openMove && 
+                            <CSSTransition in={openMove} classNames="menu-open"   timeout={300} unmountOnExit > 
                                 <ul className="move-li">
                                     {props.task.taskState !== "todo" && <li onClick={()=>moveTask("todo")}><span>To do</span></li>}
                                     {props.task.taskState !== "doing" &&<li onClick={()=>moveTask("doing")}><span>Doing</span></li>}
                                     {props.task.taskState !== "done" &&<li onClick={()=>moveTask("done")}><span>Done</span></li>}
                                 </ul>
-                            }
+                            </CSSTransition>
                         </li>
 
                         <li classnName= "share" >
@@ -157,19 +158,22 @@ export default function Task(props){
                                 <img src={shareImage} />
                                 <span>Share with</span>
                             </div>
-                            {openShare && 
+                            <CSSTransition in={openShare} classNames="menu-open"   timeout={300} unmountOnExit > 
                                 <div className="share-form">
                                     <input placeholder="Enter email" type="email" onChange={e=>setEmail(e.target.value)}/>
                                     {validEmail ? null : <p>There is no user with this email</p> }
                                     <input type="submit" value="Send" onClick={()=>shareTask(email)}></input>
                                 </div>
-                            }
+                            </CSSTransition>
                         </li>
 
                     </ul>
-                </motion.div>
-            }
-            <textarea className={expand ? 'expand-desc' : 'desc'}  value={props.task.description} onChange={event=>props.task.description=event.target.value} disabled></textarea>
+                </div>
+            </CSSTransition>
+            
+            <CSSTransition in={expand} timeout={300} classNames="drop" unmountOnExit >
+                <textarea className="txtarea" value={props.task.description} onChange={event=>props.task.description=event.target.value} disabled></textarea>
+            </CSSTransition>
         </div>
     )
 }

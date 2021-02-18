@@ -8,8 +8,8 @@ import Task from '../components/Task';
 function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
     
     const [tasks, setTasks]=useState([]);
-    const [newTaskTitle, setNewTaskTitle] = useState();
-    const [newTaskDesc, setNewTaskDesc] = useState();
+    const [newTaskTitle, setNewTaskTitle] = useState('');
+    const [newTaskDesc, setNewTaskDesc] = useState('');
     const [todoPage, setTodoPage] = useState('todo');
     const [search, setSearch] = useState('');
     user = JSON.parse(user);
@@ -101,7 +101,7 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
                         tasks.map(task=>{ 
                             if(task.taskState === todoPage){
                                 if (filterTasks(task)!==null){
-                                    return <Task task={task}  loadTasks={loadTasks} user={user}/>
+                                    return <Task key={task.id} task={task}  loadTasks={loadTasks} user={user}/>
                                 }
                             }
                         })
