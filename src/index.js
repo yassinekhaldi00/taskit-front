@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8080/api';
+axios.defaults.baseURL = 'https://sheltered-island-49140.herokuapp.com/';
 
 ReactDOM.render(
   <React.StrictMode> 

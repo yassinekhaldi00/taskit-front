@@ -113,7 +113,7 @@ export default function Task(props){
                             if(user.id !== props.user.id){
                                 let name = user.firstName +" "+user.lastName;
                                 return (
-                                    <Avatar className ="avatar" name={name} size="28" round={true} textSizeRatio={2.3} color={user.color}/>
+                                    <Avatar className ="avatar" name={name} size="25" round={true} textSizeRatio={2.3} color={user.color}/>
                                 )
                             }
                         })
