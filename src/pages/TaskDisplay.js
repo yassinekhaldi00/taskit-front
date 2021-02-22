@@ -4,10 +4,12 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import addImage from '../images/add.svg';
 import Task from '../components/Task';
+import Invitation from '../components/Invitation';
 
 function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
     
     const [tasks, setTasks]=useState([]);
+    const[invitations, setInvitations] = useState([])
     const [newTaskTitle, setNewTaskTitle] = useState('');
     const [newTaskDesc, setNewTaskDesc] = useState('');
     const [todoPage, setTodoPage] = useState('todo');
@@ -17,7 +19,30 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
     useEffect(() => {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
         loadTasks();
+        loadInvitations();
       }, []);
+
+      async function loadTasks(){
+        tasks.length = 0
+        await axios.get(`task/user/${user.id}`)
+        .then(res =>{
+            setTasks([...res.data.reverse()])
+        }).catch(erreur=>{
+            DelUserFromLocalStorage();
+            console.log(erreur);
+        })
+    }
+
+    async function loadInvitations(){
+        await axios.get(`invitation/receiver/${user.id}`)
+        .then(res =>{
+            setInvitations([...res.data.reverse()])
+        }).catch(erreur=>{
+            DelUserFromLocalStorage();
+            console.log(erreur);
+        })
+        console.log(invitations)
+    }
 
     async function addTask(){
         const data = {
@@ -39,26 +64,6 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
         
     }
 
-    async function loadTasks(){
-        tasks.length = 0
-        await axios.get('task/user/'+user.id)
-        .then(res =>{
-            res.data.map(task=>{
-                tasks.push({
-                    id: task.id,
-                    title: task.title,
-                    description: task.description,
-                    taskState: task.taskState,
-                    user: task.user
-                });
-            })
-        }).catch(erreur=>{
-            DelUserFromLocalStorage();
-            console.log(erreur);
-        })
-        setTasks([...tasks.reverse()]);
-    }
-
     function filterTasks(task){
         if (search !=='' && task.title !== null){
             if (task.title.toLowerCase().indexOf(search.toLowerCase()) !==-1){
@@ -74,6 +79,11 @@ function TaskDisplay({user,DelUserFromLocalStorage, ...rest}){
 
     return(
         <div className='todo-container'>
+            {
+                invitations.map(invitation =>{
+                    return <Invitation key={invitation.id} invitation ={invitation} loadInvitations={loadInvitations} loadTasks={loadTasks}/>
+                })
+            }
             <header className="header-bar">
                 <ul className="setting-link">
                     <li className={todoPage==="todo"? "clicked-link":null} onClick={()=>setTodoPage("todo")}>To do</li>

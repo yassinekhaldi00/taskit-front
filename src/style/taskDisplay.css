@@ -3,6 +3,36 @@
     --gray-color:#F5F2F2;
     --blue-color:#2F2E41;
 }
+.invitation-container{
+    background-color: var(--red-color);
+    border-bottom: solid 1px;
+    border-color: lightgray;
+}
+
+.invitation{
+    display:flex;
+    height: 26px;
+    width: 60%;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+}
+
+.btn-invitation{
+    border: none;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    width: 80px;
+    padding: 3px 0;
+    margin-left:5px;
+}
+.accept{
+    background-color: var(--gray-color);
+}
+.denie{
+    background-color: rgb(247, 113, 113);
+}
 
 button{
     font-family: 'Questrial', sans-serif;
@@ -452,6 +482,13 @@ button:focus{
 }
 
 @media only screen and (max-width: 800px){
+
+    .invitation{
+        width: 96%;
+    }
+    .btn-invitation{
+        width:60px;
+    }
 
     .header-bar .setting-link{
         margin:0;

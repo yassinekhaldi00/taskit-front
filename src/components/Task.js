@@ -56,8 +56,12 @@ export default function Task(props){
     }
 
     async function shareTask(email){
-        let data = props.task;
-        await axios.put('task/share/'+email, data)
+        let data = {    
+            email:email,
+            senderId:props.user.id,
+            taskId: props.task.id
+        };
+        await axios.post('invitation', data)
             .then(res=>{
                 setValidEmail(res.data);
             })
