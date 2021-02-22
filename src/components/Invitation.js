@@ -35,7 +35,7 @@ export default function Invitation(props){
                 <p>{title}</p>
                 <div className="btn-invitation-container">
                     <button className="btn-invitation accept" onClick={acceptInvitation}>Accept</button>
-                    <button className="btn-invitation denie" onClick={deleteInvitation}>Denie</button>
+                    <button className="btn-invitation denie" onClick={deleteInvitation}>Delete</button>
                 </div>
             </div>
         </div>

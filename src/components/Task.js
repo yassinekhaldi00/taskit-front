@@ -64,9 +64,14 @@ export default function Task(props){
         await axios.post('invitation', data)
             .then(res=>{
                 setValidEmail(res.data);
+                if(res.data){
+                    props.loadTasks();
+                    menuClick();
+                }
             })
-            props.loadTasks();
-            menuClick();
+           
+            
+            
     }
 
     function menuClick(){
@@ -166,7 +171,7 @@ export default function Task(props){
                                 <div className="share-form">
                                     <input placeholder="Enter email" type="email" onChange={e=>setEmail(e.target.value)}/>
                                     {validEmail ? null : <p>There is no user with this email</p> }
-                                    <input type="submit" value="Send" onClick={()=>shareTask(email)}></input>
+                                    <input type="submit" value="Send" onClick={(e)=>shareTask(email)}></input>
                                 </div>
                             </CSSTransition>
                         </li>
