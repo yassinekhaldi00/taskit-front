@@ -19,7 +19,7 @@ function Navbar(props){
                 <ul>
                     <li><NavLink className='link' to ='/taskdisplay'> Home </NavLink></li>
                     <li><NavLink className='link' to ='/setting'> 
-                        <Avatar className ="avatar" name={userName} size="28" round={true} textSizeRatio={2.3} color="#F39595"/>{
+                        <Avatar className ="avatar" name={userName} size="25" round={true} textSizeRatio={2.3} color={user.color}/>{
                         firstName}
                     </NavLink></li>
                     <li className='signup'><NavLink className='link'to='/Login' onClick={props.DelUserFromLocalStorage}>Logout </NavLink></li>

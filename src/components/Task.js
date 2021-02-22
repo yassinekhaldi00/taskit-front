@@ -68,10 +68,7 @@ export default function Task(props){
                     props.loadTasks();
                     menuClick();
                 }
-            })
-           
-            
-            
+            })      
     }
 
     function menuClick(){
@@ -114,9 +111,9 @@ export default function Task(props){
                     {
                         props.task.user.map(user=>{
                             if(user.id !== props.user.id){
-                                let name = user.firstName +" "+user.lastName
+                                let name = user.firstName +" "+user.lastName;
                                 return (
-                                    <Avatar className ="avatar" name={name} size="28" round={true} textSizeRatio={2.3} />
+                                    <Avatar className ="avatar" name={name} size="28" round={true} textSizeRatio={2.3} color={user.color}/>
                                 )
                             }
                         })

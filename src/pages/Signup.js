@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../style/signup.css';
 import {useHistory, withRouter} from 'react-router-dom';
 import axios from 'axios';
+import { RandomColor } from '../util/RandomColor';
 
 function Signup(props){
     const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ function Signup(props){
     const [accountExist, setAccountExist] = useState(false);
 
 
+
     let history = useHistory();
 
     async function handleSubmit(e){
@@ -21,7 +23,8 @@ function Signup(props){
             email: email,
             password: password,
             firstName: firstName,
-            lastName: lastName
+            lastName: lastName,
+            color: RandomColor()
         }
         if(checkbox){
             await axios.post('user/signup', data)
