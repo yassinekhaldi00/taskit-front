@@ -5,7 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://sheltered-island-49140.herokuapp.com/api';
+const herokuUrl = 'https://sheltered-island-49140.herokuapp.com/api';
+const localUrl ='http://localhost:8080/api';
+
+axios.defaults.baseURL = herokuUrl;
 
 ReactDOM.render(
   <React.StrictMode> 
